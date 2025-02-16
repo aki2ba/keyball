@@ -22,7 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum custom_keycodes {
   SS_LHOST = KEYBALL_SAFE_RANGE,
-  SS_DC
+  SS_DC,
+  TO0_MHEN,
+  TO0_HENK
 };
 
 enum combos {
@@ -41,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_universal(
     KC_INT4   , KC_Q     , KC_W         , KC_E           , KC_R           , KC_T     ,                                        KC_Y     , KC_U        , KC_I           , KC_O            , KC_P     , KC_BSPC   ,
     _______   , KC_A     , KC_S         , CTL_T(KC_D)    , LT(2,KC_F)     , KC_G     ,                                        KC_H     , LT(2,KC_J)  , CTL_T(KC_K)    , ALT_T(KC_L)     , TO(2)    , TO(3)     ,
-    KC_INT5   , KC_Z     , SFT_T(KC_X)  , LT(3,KC_C)     , LT(1,KC_V)     , KC_B     ,                                        KC_N     , LT(1,KC_M)  , LT(3,KC_COMM)  , 	SFT_T(KC_DOT) , KC_SLSH  , KC_DEL    ,
+    TO0_MHEN   , KC_Z     , SFT_T(KC_X)  , LT(3,KC_C)     , LT(1,KC_V)     , KC_B     ,                                        KC_N     , LT(1,KC_M)  , LT(3,KC_COMM)  , 	SFT_T(KC_DOT) , KC_SLSH  , KC_DEL    ,
                 TO(2)    , _______      , _______          , KC_SPC       , KC_ENT   ,                       KC_LWIN,   KC_TAB, 	KC_ESC,     KC_MINS  , S(KC_INT1)
   ),
 
@@ -98,6 +100,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               SEND_STRING("docker compose");
           }
           return false;
+      case TO0_MHEN:
+          if (record->event.pressed) {
+              tap_code16(TO(0));
+              tap_code16(KC_INT5);
+          }
   }
 
   return true;
