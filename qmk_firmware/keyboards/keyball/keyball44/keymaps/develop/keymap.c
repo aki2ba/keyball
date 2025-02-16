@@ -31,7 +31,7 @@ enum combos {
   CL_CPLK
 };
 
-const uint16_t PROGMEM cl_combo[] = {KC_C, KC_L, COMBO_END};
+const uint16_t PROGMEM cl_combo[] = {KC_A, KC_H, COMBO_END};
 
 combo_t key_combos[] = {
   [CL_CPLK] = COMBO(cl_combo, KC_CAPS),
@@ -105,7 +105,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               layer_move(0);
               tap_code16(KC_INT5);
           }
-      case TO0_MHEN:
+      case TO0_HENK:
           if (record->event.pressed) {
               layer_move(0);
               tap_code16(KC_INT4);
