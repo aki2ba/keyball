@@ -21,7 +21,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 enum custom_keycodes {
-  SS_HELLO = KEYBALL_SAFE_RANGE,
+  SS_LHOST = KEYBALL_SAFE_RANGE,
+  SS_DC
+};
+
+enum combos {
+  CL_CPLK
+};
+
+const uint16_t PROGMEM cl_combo[] = {KC_C, KC_L, COMBO_END};
+
+combo_t key_combos[] = {
+  [CL_CPLK] = COMBO(cl_combo, KC_CAPS),
 };
 
 // clang-format off
@@ -37,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [1] = LAYOUT_universal(
     KC_INT4   ,  S(KC_EQL)  , KC_1     , KC_2    , KC_3   , S(KC_4)   ,                                               S(KC_LBRC)   , S(KC_1)    , S(KC_2)    , S(KC_3)     , S(KC_SCLN)  , S(KC_QUOT)  ,
     TO(0)     ,  KC_0       , KC_4     , KC_5    , KC_6   , S(KC_5)   ,                                               KC_LBRC      , S(KC_7)    , S(KC_8)    , S(KC_9)     ,  KC_SCLN    , KC_QUOT     ,
-    KC_INT5   ,  KC_EQL     , KC_7     , KC_8    , KC_9   , S(KC_6)   ,                                               KC_PGDN      ,  KC_MINS   , S(KC_MINS) , S(KC_INT1)  , 	KC_NUBS    , KC_DEL      ,
+    KC_INT5   ,  KC_EQL     , KC_7     , KC_8    , KC_9   , S(KC_6)   ,                                               KC_PGDN      , S(KC_MINS) , KC_MINS    , S(KC_INT1)  , 	KC_NUBS    , KC_DEL      ,
                   _______  , _______ , _______  ,    KC_SPC,        KC_ENT,                            KC_LWIN    , KC_TAB      ,	KC_ESC       , KC_RBRC    , KC_BSLS
   ),
 
@@ -52,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_INT4   , KC_F1     , KC_F2    , KC_F3      , KC_F4     , KC_F5    ,                                        KC_F6     , KC_F7     , KC_F8     , KC_F9     , KC_F10    , KC_PSCR   ,
     TO(0)     , KC_F11    , C(KC_S)  , C(KC_D)    , C(KC_F)   , KC_F12   ,                                        _______   , C(KC_J)   , C(KC_K)   , C(KC_L)   , TO(2)     , _______   ,
     KC_INT5   , _______   , C(KC_X)  , S(KC_TAB)  , KC_TAB    , C(KC_B)  ,                                        C(KC_N)   , KC_LALT   , _______   , KC_LSFT   , _______   , _______   ,
-                TO(2)     , _______  , _______    ,        _______  , KC_ESC  ,                   _______  , _______  , SS_HELLO       , KBC_RST  , QK_BOOT
+                TO(2)     , _______  , _______    ,        _______  , KC_ESC  ,                   _______  , SS_DC     , SS_LHOST       , KBC_RST  , QK_BOOT
   ),
 };
 // clang-format on
@@ -77,9 +88,14 @@ void oledkit_render_info_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-      case SS_HELLO:
+      case SS_LHOST:
           if (record->event.pressed) {
-              SEND_STRING("Hello, world!\n");
+              SEND_STRING("localhost");
+          }
+          return false;
+      case SS_DC:
+          if (record->event.pressed) {
+              SEND_STRING("docker compose");
           }
           return false;
   }
