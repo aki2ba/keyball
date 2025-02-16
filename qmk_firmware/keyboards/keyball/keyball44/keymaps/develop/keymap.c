@@ -20,6 +20,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+enum custom_keycodes {
+  SS_HELLO = KEYBALL_SAFE_RANGE,
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
@@ -70,10 +74,6 @@ void oledkit_render_info_user(void) {
 }
 
 #endif
-
-enum custom_keycodes {
-  SS_HELLO = KEYBALL_SAFE_RANGE,
-};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
