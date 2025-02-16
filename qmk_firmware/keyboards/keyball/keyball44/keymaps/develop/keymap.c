@@ -31,9 +31,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [1] = LAYOUT_universal(
-    KC_INT4   ,  KC_EQL  , KC_1     , KC_2    , KC_3   , S(KC_4)   ,                                               S(KC_LBRC)   , S(KC_1)    , S(KC_2)    , S(KC_3)     , S(KC_SCLN)  , KC_BSPC  ,
-    TO(0)     ,  KC_0    , KC_4     , KC_5    , KC_6   , S(KC_5)   ,                                               KC_LBRC      , S(KC_7)    , S(KC_8)    , S(KC_9)     ,  TO(2)      , TO(3)    ,
-    KC_INT5   ,  S(KC_EQL)  , KC_7     , KC_8    , KC_9   , S(KC_6)   ,                                               KC_PGDN      ,  KC_MINS   , S(KC_MINS) , S(KC_INT1)  , 	KC_NUBS   , KC_DEL   ,
+    KC_INT4   ,  S(KC_EQL)  , KC_1     , KC_2    , KC_3   , S(KC_4)   ,                                               S(KC_LBRC)   , S(KC_1)    , S(KC_2)    , S(KC_3)     , S(KC_SCLN)  , KC_BSPC  ,
+    TO(0)     ,  KC_0       , KC_4     , KC_5    , KC_6   , S(KC_5)   ,                                               KC_LBRC      , S(KC_7)    , S(KC_8)    , S(KC_9)     ,  TO(2)      , TO(3)    ,
+    KC_INT5   ,  KC_EQL     , KC_7     , KC_8    , KC_9   , S(KC_6)   ,                                               KC_PGDN      ,  KC_MINS   , S(KC_MINS) , S(KC_INT1)  , 	KC_NUBS   , KC_DEL   ,
                   _______  , _______ , _______  ,    KC_SPC,        KC_ENT,                            KC_LWIN    , KC_TAB      ,	KC_ESC       , KC_RBRC    , KC_BSLS
   ),
 
