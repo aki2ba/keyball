@@ -45,13 +45,3 @@ void keyball_on_adjust_layout(keyball_adjust_t v) {
 #endif
 }
 
-bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-    switch(keycode) {
-        case SS_HELLO:
-            if (record->event.pressed) {
-                SEND_STRING("Hello, world!\n");
-            }
-            return false;
-    }
-    return process_record_user(keycode, record);
-};
