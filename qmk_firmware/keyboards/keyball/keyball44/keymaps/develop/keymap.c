@@ -69,6 +69,10 @@ void oledkit_render_info_user(void) {
     keyball_oled_render_layerinfo();
 }
 
+enum custom_keycodes {
+  SS_HELLO = SAFE_RANGE, // QMKの安全なキーコード範囲から定義
+};
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
       case SS_HELLO:
