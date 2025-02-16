@@ -41,9 +41,9 @@ combo_t key_combos[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
   [0] = LAYOUT_universal(
-    TO0_HENK   , KC_Q     , KC_W         , KC_E           , KC_R           , KC_T     ,                                        KC_Y     , KC_U        , KC_I           , KC_O            , KC_P     , KC_BSPC   ,
-    TO0_HENK   , KC_A     , KC_S         , CTL_T(KC_D)    , LT(2,KC_F)     , KC_G     ,                                        KC_H     , LT(2,KC_J)  , CTL_T(KC_K)    , ALT_T(KC_L)     , TO(2)    , TO(3)     ,
-    TO0_MHEN   , KC_Z     , SFT_T(KC_X)  , LT(3,KC_C)     , LT(1,KC_V)     , KC_B     ,                                        KC_N     , LT(1,KC_M)  , LT(3,KC_COMM)  , 	SFT_T(KC_DOT) , KC_SLSH  , KC_DEL    ,
+    KC_INT4    , KC_Q     , KC_W         , KC_E           , KC_R           , KC_T     ,                                        KC_Y     , KC_U        , KC_I           , KC_O            , KC_P     , KC_BSPC   ,
+    KC_INT4    , KC_A     , KC_S         , CTL_T(KC_D)    , LT(2,KC_F)     , KC_G     ,                                        KC_H     , LT(2,KC_J)  , CTL_T(KC_K)    , ALT_T(KC_L)     , TO(2)    , TO(3)     ,
+    KC_INT5    , KC_Z     , SFT_T(KC_X)  , LT(3,KC_C)     , LT(1,KC_V)     , KC_B     ,                                        KC_N     , LT(1,KC_M)  , LT(3,KC_COMM)  , 	SFT_T(KC_DOT) , KC_SLSH  , KC_DEL    ,
                 TO(2)    , _______      , _______          , KC_SPC       , KC_ENT   ,                       KC_LWIN,   KC_TAB, 	KC_ESC,     KC_MINS  , S(KC_INT1)
   ),
 
