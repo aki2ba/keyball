@@ -70,3 +70,19 @@ void oledkit_render_info_user(void) {
 }
 
 #endif
+
+enum custom_keycodes {
+  SS_HELLO = KEYBALL_SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+      case SS_HELLO:
+          if (record->event.pressed) {
+              SEND_STRING("Hello, world!\n");
+          }
+          return false;
+  }
+
+  return true;
+}
