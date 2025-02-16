@@ -38,17 +38,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [2] = LAYOUT_universal(
-    KC_INT4  , C(KC_Q)    , KC_W      , C(KC_E)     , C(KC_R)     , C(KC_T)     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , S(KC_4)    , KC_BSPC   ,
+    KC_INT4  , C(KC_Q)    , KC_W      , C(KC_E)     , C(KC_R)     , C(KC_T)     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO(0)    , C(KC_A)    , MS_BTN1   , MS_BTN3     , MS_BTN2     , C(KC_G)     ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	MS_BTN2        , _______    , TO(3)     ,
     KC_INT5  , C(KC_Z)    , KC_LSFT   , C(KC_C)     , C(KC_V)     , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
-                  TO(3)     , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_LWIN   , KC_TAB     , KC_ESC           , _______        , _______
+                  TO(3)     , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_LWIN   , KC_TAB     , KC_ESC           , KC_HOME        , KC_END
   ),
 
   [3] = LAYOUT_universal(
-    KC_INT4  , KC_F1   , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                                        KC_F6  , KC_F7  , KC_F8  , KC_F9 , KC_F10 , KC_PSCR  ,
-    TO(0)  , KC_F11  , C(KC_S)  , C(KC_D)  , C(KC_F)  , KC_F12 ,                                        _______  , C(KC_J)  , C(KC_K)  , C(KC_L) , TO(2)  , _______  ,
-    KC_INT5 , _______  , C(KC_X)  , S(KC_TAB)  , KC_TAB  , C(KC_B) ,                                        C(KC_N)  , KC_LALT , _______ , KC_LSFT  , _______  , _______ ,
-                  TO(2)  , _______  , _______  ,        _______  , KC_ESC  ,                   _______  , _______  , _______       , KBC_RST  , QK_BOOT
+    KC_INT4   , KC_F1     , KC_F2    , KC_F3      , KC_F4     , KC_F5    ,                                        KC_F6     , KC_F7     , KC_F8     , KC_F9     , KC_F10    , KC_PSCR   ,
+    TO(0)     , KC_F11    , C(KC_S)  , C(KC_D)    , C(KC_F)   , KC_F12   ,                                        _______   , C(KC_J)   , C(KC_K)   , C(KC_L)   , TO(2)     , _______   ,
+    KC_INT5   , _______   , C(KC_X)  , S(KC_TAB)  , KC_TAB    , C(KC_B)  ,                                        C(KC_N)   , KC_LALT   , _______   , KC_LSFT   , _______   , _______   ,
+                TO(2)     , _______  , _______    ,        _______  , KC_ESC  ,                   _______  , _______  , _______       , KBC_RST  , QK_BOOT
   ),
 };
 // clang-format on
