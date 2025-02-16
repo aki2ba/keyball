@@ -93,5 +93,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // clang-format on
 
+enum keyboard_keycodes {
+    SS_HELLO = QK_KB_0,
+};
+
 #define LAYOUT LAYOUT_right_ball
 #define LAYOUT_universal LAYOUT_no_ball

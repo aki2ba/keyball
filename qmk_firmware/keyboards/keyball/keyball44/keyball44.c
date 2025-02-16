@@ -44,3 +44,14 @@ void keyball_on_adjust_layout(keyball_adjust_t v) {
     rgblight_set_effect_range(0, lednum_this + lednum_that);
 #endif
 }
+
+bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+        case SS_HELLO:
+            if (record->event.pressed) {
+                SEND_STRING("Hello, world!\n");
+            }
+            return false;
+    }
+    return process_record_user(keycode, record);
+};
