@@ -131,7 +131,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
               if (record->tap.count) {
                   // タップ時に Ctrl+C を送信
-                  tap_code16(C(KC_C))
+                  tap_code16(C(KC_C));
                   return false; // 他の処理をスキップ
               } else {
                   // ホールド時にレイヤー3へ
