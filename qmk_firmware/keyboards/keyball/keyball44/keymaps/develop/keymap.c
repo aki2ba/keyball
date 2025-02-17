@@ -49,8 +49,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [1] = LAYOUT_universal(
     KC_TAB     ,  S(KC_EQL)  , KC_1     , KC_2    , KC_3   , S(KC_4)   ,                                               S(KC_LBRC)   , S(KC_1)    , S(KC_2)    , S(KC_3)     , S(KC_SCLN)  , S(KC_QUOT)  ,
-    TO0_MHEN   ,  KC_0       , KC_4     , KC_5    , KC_6   , S(KC_5)   ,                                               KC_LBRC      , S(KC_7)    , S(KC_8)    , S(KC_9)     ,  KC_SCLN    , KC_QUOT     ,
-    TO0_HENK   ,  KC_EQL     , KC_7     , KC_8    , KC_9   , S(KC_6)   ,                                               KC_PGDN      , S(KC_MINS) , KC_MINS    , S(KC_INT1)  , 	KC_NUBS    , KC_DEL      ,
+    TO0_MHEN   ,  KC_0       , KC_4     , KC_5    , KC_6   , S(KC_5)   ,                                               KC_LBRC      , S(KC_7)    , S(KC_8)    , S(KC_9)     , KC_SCLN     , KC_QUOT     ,
+    TO0_HENK   ,  KC_EQL     , KC_7     , KC_8    , KC_9   , S(KC_6)   ,                                               S(KC_INT3)   , S(KC_MINS) , KC_MINS    , S(KC_INT1)  , KC_INT3     , KC_DEL      ,
                   _______  , _______ , _______  ,    KC_SPC,        KC_ENT,                            KC_ESC    , KC_LWIN      ,	KC_CAPS       , KC_RBRC    , KC_BSLS
   ),
 
