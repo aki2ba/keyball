@@ -131,10 +131,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case LT3_COPY:
           if (record->tap.count && record->event.pressed) {
               // タップ時に Ctrl+C を送信
-              register_code(KC_LCTL);
-              register_code(KC_C);
-              unregister_code(KC_C);
-              unregister_code(KC_LCTL);
+              tap_code16(C(KC_C))
               return false; // 他の処理をスキップ
           } else if (!record->tap.count && record->event.pressed) {
               // ホールド時にレイヤー3へ
