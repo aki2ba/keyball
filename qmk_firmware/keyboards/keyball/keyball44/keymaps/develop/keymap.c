@@ -53,17 +53,6 @@ tap_dance_action_t tap_dance_actions[] = {
   [TD_L3_CTL_C] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctl_c_finished, ctl_c_reset)
 };
 
-enum combos {
-  CL_CPLK
-};
-
-const uint16_t PROGMEM cl_combo[] = {KC_C, KC_L, COMBO_END};
-
-combo_t key_combos[] = {
-  [CL_CPLK] = COMBO(cl_combo, S(KC_CAPS)),
-};
-
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
