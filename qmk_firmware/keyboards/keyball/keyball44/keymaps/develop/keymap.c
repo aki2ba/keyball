@@ -28,30 +28,30 @@ enum custom_keycodes {
   LT3_COPY
 };
 
-enum {
-  TD_L3_CTL_C = 0
-};
+// enum {
+//   TD_L3_CTL_C = 0
+// };
 
-void ctl_c_finished(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-      // タップ時に Ctrl+C を送信
-      register_code(KC_LCTL);
-      register_code(KC_C);
-      unregister_code(KC_C);
-      unregister_code(KC_LCTL);
-  } else {
-      // ホールド時にレイヤー3に移行
-      layer_on(3);
-  }
-}
+// void ctl_c_finished(tap_dance_state_t *state, void *user_data) {
+//   if (state->count == 1) {
+//       // タップ時に Ctrl+C を送信
+//       register_code(KC_LCTL);
+//       register_code(KC_C);
+//       unregister_code(KC_C);
+//       unregister_code(KC_LCTL);
+//   } else {
+//       // ホールド時にレイヤー3に移行
+//       layer_on(3);
+//   }
+// }
 
-void ctl_c_reset(tap_dance_state_t *state, void *user_data) {
-  layer_off(3);
-}
+// void ctl_c_reset(tap_dance_state_t *state, void *user_data) {
+//   layer_off(3);
+// }
 
-tap_dance_action_t tap_dance_actions[] = {
-  [TD_L3_CTL_C] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctl_c_finished, ctl_c_reset)
-};
+// tap_dance_action_t tap_dance_actions[] = {
+//   [TD_L3_CTL_C] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctl_c_finished, ctl_c_reset)
+// };
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [2] = LAYOUT_universal(
     KC_TAB    , C(KC_Q)    , KC_W      , C(KC_E)        , C(KC_R)     , C(KC_T)     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , C(KC_A)    , MS_BTN1   , MS_BTN3        , MS_BTN2     , KC_ENT      ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	MS_BTN2        , _______    , TO(3)     ,
-    TO0_HENK  , C(KC_Z)    , KC_LSFT   , TD(TD_L3_CTL_C), C(KC_V)     , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
+    TO0_HENK  , C(KC_Z)    , KC_LSFT   , L3_CTL_C       , C(KC_V)     , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
                   TO(3)     , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
 
@@ -126,6 +126,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
               layer_move(0);
               tap_code16(KC_INT4);
+          }
+          return false;
+      case L3_CTL_C:
+          if (record->tap.count && record->event.pressed) {
+              // タップ時に Ctrl+C を送信
+              register_code(KC_LCTL);
+              register_code(KC_C);
+              unregister_code(KC_C);
+              unregister_code(KC_LCTL);
+              return false; // 他の処理をスキップ
+          } else if (!record->tap.count && record->event.pressed) {
+              // ホールド時にレイヤー3へ
+              layer_on(3);
+              return false;
+          } else if (!record->event.pressed) {
+              // ホールド解除でレイヤー3をオフ
+              layer_off(3);
           }
           return false;
   }
