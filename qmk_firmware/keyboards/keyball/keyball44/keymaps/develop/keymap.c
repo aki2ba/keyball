@@ -129,14 +129,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
       case LT3_COPY:
-          if (record->tap.count && record->event.pressed) {
-              // タップ時に Ctrl+C を送信
-              tap_code16(C(KC_C));
-              return false; // 他の処理をスキップ
-          } else if (!record->tap.count && record->event.pressed) {
-              // ホールド時にレイヤー3へ
-              layer_on(3);
-              return false;
+          if (record->event.pressed) {
+              if (record->tap.count > 0) {
+                  // タップ時に Ctrl+C を送信
+                  tap_code16(C(KC_C));
+                  return false; // 他の処理をスキップ
+              } else {
+                  // ホールド時にレイヤー3へ
+                  layer_on(3);
+                  return false;
+              }
           } else if (!record->event.pressed) {
               // ホールド解除でレイヤー3をオフ
               layer_off(3);
