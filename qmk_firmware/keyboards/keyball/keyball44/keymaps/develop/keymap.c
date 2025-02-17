@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [2] = LAYOUT_universal(
     KC_TAB    , C(KC_Q)    , KC_W      , C(KC_E)        , C(KC_R)     , C(KC_T)     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , C(KC_A)    , MS_BTN1   , MS_BTN3        , MS_BTN2     , KC_ENT      ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	MS_BTN2        , _______    , TO(3)     ,
-    TO0_HENK  , C(KC_Z)    , KC_LSFT   , L3_CTL_C       , C(KC_V)     , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
+    TO0_HENK  , C(KC_Z)    , KC_LSFT   , LT3_COPY       , C(KC_V)     , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
                   TO(3)     , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
 
@@ -128,7 +128,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               tap_code16(KC_INT4);
           }
           return false;
-      case L3_CTL_C:
+      case LT3_COPY:
           if (record->tap.count && record->event.pressed) {
               // タップ時に Ctrl+C を送信
               register_code(KC_LCTL);
