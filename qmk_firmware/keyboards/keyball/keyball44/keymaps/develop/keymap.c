@@ -70,9 +70,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [2] = LAYOUT_universal(
-    KC_TAB    , C(KC_Q)    , KC_W      , C(KC_E)        , C(KC_R)     , C(KC_T)     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
-    TO0_MHEN  , C(KC_A)    , MS_BTN1   , MS_BTN3        , MS_BTN2     , KC_ENT      ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	MS_BTN2        , _______    , TO(3)     ,
-    TO0_HENK  , C(KC_Z)    , KC_LSFT   , LT(3,KC_NO)       , C(KC_V)     , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
+    KC_TAB    , C(KC_Q)    , KC_W         , C(KC_E)      , C(KC_R)     , C(KC_T)     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
+    TO0_MHEN  , C(KC_A)    , MS_BTN1      , MS_BTN3      , MS_BTN2     , KC_ENT      ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	MS_BTN2        , _______    , TO(3)     ,
+    TO0_HENK  , C(KC_Z)    , LT(0,KC_NO)  , LT(3,KC_NO)  , C(KC_V)     , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
                   TO(3)     , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
 
@@ -143,7 +143,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               layer_off(3);
           }
           return false;
+      case LT(0,KC_NO):
+          if (record->event.pressed) {
+              if (record->tap.count) {
+                  // タップ時に Ctrl+C を送信
+                  tap_code16(A(KC_TAB));
+                  return false; // 他の処理をスキップ
+              } else {
+                  // ホールド時にレイヤー3へ
+                  register_code16(KC_LSFT);
+                  return false;
+              }
+          } else if (!record->event.pressed) {
+              // ホールド解除でレイヤー3をオフ
+              unregister_code16(KC_LSFT);
+          }
+          return false;
   }
-
   return true;
 }
