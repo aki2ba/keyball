@@ -4,8 +4,6 @@ OLED_ENABLE = yes
 
 SEND_STRING_ENABLE = yes
 
-COMBO_ENABLE = yes
-
 TAP_DANCE_ENABLE = yes
 
 # for debug
