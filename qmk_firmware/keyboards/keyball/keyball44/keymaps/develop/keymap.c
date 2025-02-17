@@ -113,11 +113,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
       case LT3_COPY:
           if (record->tap.count && record->event.pressed) {
-              tap_code16(C(KC_C))
+              tap_code16(C(KC_C));
           } else if (record->event.pressed) {
-              layer_on(3)
+              layer_on(3);
           } else {
-              layer_off(3)
+              layer_off(3);
           }
   }
 
