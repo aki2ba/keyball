@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum custom_keycodes {
   SS_LHOST = KEYBALL_SAFE_RANGE,
   SS_DC,
+  SS_SD,
   TO0_MHEN,
   TO0_HENK
 };
@@ -65,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB     , KC_F1     , KC_F2    , KC_F3      , KC_F4     , KC_F5    ,                                        KC_F6     , KC_F7     , KC_F8     , KC_F9     , KC_F10    , KC_PSCR   ,
     TO0_MHEN   , KC_F11    , C(KC_S)  , C(KC_D)    , C(KC_F)   , KC_F12   ,                                        _______   , C(KC_J)   , C(KC_K)   , C(KC_L)   , TO(2)     , _______   ,
     TO0_HENK   , _______   , C(KC_X)  , S(KC_TAB)  , KC_TAB    , C(KC_B)  ,                                        C(KC_N)   , KC_LALT   , _______   , KC_LSFT   , _______   , _______   ,
-                TO(2)     , _______  , _______    ,        _______  , _______  ,                   SS_LHOST  , SS_DC     , _______       , KBC_RST  , QK_BOOT
+                TO(2)     , _______  , _______    ,        _______  , _______  ,                   SS_LHOST  , SS_DC     , SS_SD       , KBC_RST  , QK_BOOT
   ),
 };
 // clang-format on
@@ -98,6 +99,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case SS_DC:
           if (record->event.pressed) {
               SEND_STRING("docker compose");
+          }
+          return false;
+      case SS_SD:
+          if (record->event.pressed) {
+              SEND_STRING("/home/wsl-user/workspace/sd_docker/workspace.code-workspace");
           }
           return false;
       case TO0_MHEN:
