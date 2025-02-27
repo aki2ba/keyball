@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum custom_keycodes {
   SS_LHOST = KEYBALL_SAFE_RANGE,
   SS_DC,
+  SS_SD,
   TO0_MHEN,
   TO0_HENK
 };
