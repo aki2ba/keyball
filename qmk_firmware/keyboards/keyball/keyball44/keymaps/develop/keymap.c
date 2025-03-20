@@ -18,15 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-#include "quantum.h"
-
-bool pointing_device_task_user(report_mouse_t* mouse_report) {
-  // マウス移動があったか確認（xまたはyが0でない場合）
-  if ((mouse_report->x != 0 || mouse_report->y != 0) && layer_state_is(0)) {
-      layer_move(2); // レイヤー0にいる時のみレイヤー2に切り替える
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+  if ((mouse_report.x != 0 || mouse_report.y != 0) && layer_state_is(0)) {
+      layer_move(2);
   }
 
-  return true; // 他の処理を継続（マウス動作を保持）
+  return mouse_report;
 }
 
 enum custom_keycodes {
