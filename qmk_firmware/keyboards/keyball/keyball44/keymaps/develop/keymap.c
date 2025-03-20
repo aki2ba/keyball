@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+<<<<<<< HEAD
 #include "pointing_device.h"
 
 static bool trackball_moving = false;
@@ -39,6 +40,8 @@ bool pointing_device_task(void) {
   return true; // 追加: QMK の `pointing_device_task()` の仕様に従う
 }
 
+=======
+>>>>>>> parent of 49c09ca (トラックボールテスト)
 enum custom_keycodes {
   SS_LHOST = KEYBALL_SAFE_RANGE,
   SS_DC,
