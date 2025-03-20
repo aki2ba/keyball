@@ -20,28 +20,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-<<<<<<< HEAD
 #include "pointing_device.h"
 
 static bool trackball_moving = false;
 
 bool pointing_device_task(void) {
-  report_mouse_t mouse_report = pointing_device_get_report();
+    // デフォルトのトラックボール処理を実行
+    bool result = pointing_device_process();
 
-  if (mouse_report.x != 0 || mouse_report.y != 0 || mouse_report.h != 0 || mouse_report.v != 0) {
-      if (!trackball_moving && get_highest_layer(layer_state) == 0) {
-          layer_on(2);
-      }
-      trackball_moving = true;
-  } else {
-      trackball_moving = false;
-  }
+    // トラックボールの動きを検出
+    report_mouse_t mouse_report = pointing_device_get_report();
 
-  return true; // 追加: QMK の `pointing_device_task()` の仕様に従う
+    if (mouse_report.x != 0 || mouse_report.y != 0 || mouse_report.h != 0 || mouse_report.v != 0) {
+        if (!trackball_moving && get_highest_layer(layer_state) == 0) {
+            // トラックボールが動き出した & 現在レイヤー0ならレイヤー2に変更
+            layer_on(2);
+        }
+        trackball_moving = true;
+    } else {
+        trackball_moving = false;
+    }
+
+    return result; // デフォルトの動作を維持する
 }
 
-=======
->>>>>>> parent of 49c09ca (トラックボールテスト)
 enum custom_keycodes {
   SS_LHOST = KEYBALL_SAFE_RANGE,
   SS_DC,
