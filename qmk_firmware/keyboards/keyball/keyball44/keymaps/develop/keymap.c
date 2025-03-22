@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-  if ((mouse_report.x != 0 || mouse_report.y != 0) && layer_state_is(0)) {
+  if (layer_state_is(0) && (abs(mouse_report.x) > 10 || abs(mouse_report.y) > 10)) {
       layer_move(2);
   }
 
