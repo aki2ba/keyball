@@ -123,111 +123,124 @@ void oledkit_render_info_user(void) {
 
 #endif
 
-static uint16_t ctrlc_timer;
+static uint16_t ctrlc_timer = 0;
 static bool ctrlc_interrupted = false;
 static bool is_ctrlc_pressed = false;
+static bool is_ctrlc_hold_mode = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-      case SS_LHOST:
-          if (record->event.pressed) {
-              SEND_STRING("localhost");
-          }
-          return false;
-      case SS_DC:
-          if (record->event.pressed) {
-              SEND_STRING("docker compose");
-          }
-          return false;
-      case SS_SD:
-          if (record->event.pressed) {
-              SEND_STRING("/home/wsl-user/workspace/sd_docker/workspace.code-workspace");
-          }
-          return false;
-      case TO0_MHEN:
-          if (record->event.pressed) {
-              layer_move(0);
-              tap_code16(KC_INT5);
-          }
-          return false;
-      case TO0_HENK:
-          if (record->event.pressed) {
-              layer_move(0);
-              tap_code16(KC_INT4);
-          }
-          return false;
-      case CTRLC_OR_LAYER3:
-          if (record->event.pressed) {
-              ctrlc_timer = timer_read();
-              ctrlc_interrupted = false;
-              is_ctrlc_pressed = true;
-          } else {
-              is_ctrlc_pressed = false;
-              if (!ctrlc_interrupted && timer_elapsed(ctrlc_timer) < TAPPING_TERM) {
-                  tap_code16(C(KC_C));
-              } else {
-                  layer_off(3);
-              }
-          }
-          return false;
-      case LT(3,KC_NO):
-          if (record->event.pressed) {
-              if (record->tap.count) {
-                  // タップ時に Ctrl+C を送信
-                  tap_code16(C(KC_C));
-                  return false; // 他の処理をスキップ
-              } else {
-                  // ホールド時にレイヤー3へ
-                  layer_on(3);
-                  return false;
-              }
-          } else if (!record->event.pressed) {
-              // ホールド解除でレイヤー3をオフ
-              layer_off(3);
-          }
-          return false;
-      case LT(0,KC_NO):
-          if (record->event.pressed) {
-              if (record->tap.count) {
-                  tap_code16(A(KC_TAB));
-                  return false;
-              } else {
-                  register_code16(KC_LSFT);
-                  return false;
-              }
-          } else if (!record->event.pressed) {
-              unregister_code16(KC_LSFT);
-          }
-          return false;
-      case LT(4,KC_NO):
-          if (record->event.pressed) {
-              if (record->tap.count) {
-                  tap_code16(KC_E);
-                  return false; // 他の処理をスキップ
-              } else {
-                  register_code16(KC_SPC);
-                  return false;
-              }
-          } else if (!record->event.pressed) {
-              unregister_code16(KC_SPC);
-          }
-          return false;
-      case LT(5,KC_NO):
-          if (record->event.pressed) {
-              if (record->tap.count) {
-                  tap_code16(C(KC_V));
-                  return false; // 他の処理をスキップ
-              } else {
-                  register_code16(KC_LSFT);
-                  return false;
-              }
-          } else if (!record->event.pressed) {
-              unregister_code16(KC_LSFT);
-          }
-          return false;
-  }
-  if (record->event.pressed && is_ctrlc_pressed) {
-      ctrlc_interrupted = true;
-  }
-  return true;
+    switch (keycode) {
+        case SS_LHOST:
+            if (record->event.pressed) {
+                SEND_STRING("localhost");
+            }
+            return false;
+        case SS_DC:
+            if (record->event.pressed) {
+                SEND_STRING("docker compose");
+            }
+            return false;
+        case SS_SD:
+            if (record->event.pressed) {
+                SEND_STRING("/home/wsl-user/workspace/sd_docker/workspace.code-workspace");
+            }
+            return false;
+        case TO0_MHEN:
+            if (record->event.pressed) {
+                layer_move(0);
+                tap_code16(KC_INT5);
+            }
+            return false;
+        case TO0_HENK:
+            if (record->event.pressed) {
+                layer_move(0);
+                tap_code16(KC_INT4);
+            }
+            return false;
+        case CTRLC_OR_LAYER3:
+            if (record->event.pressed) {
+                ctrlc_timer = timer_read();
+                ctrlc_interrupted = false;
+                is_ctrlc_pressed = true;
+                is_ctrlc_hold_mode = false;
+            } else {
+                is_ctrlc_pressed = false;
+
+                if (!ctrlc_interrupted && timer_elapsed(ctrlc_timer) < TAPPING_TERM) {
+                    // タップ → Ctrl+C
+                    tap_code16(C(KC_C));
+                } else {
+                    // ホールド終了 → レイヤー3オフ
+                    if (is_ctrlc_hold_mode) {
+                        layer_off(3);
+                        is_ctrlc_hold_mode = false;
+                    }
+                }
+            }
+            return false;
+        case LT(3,KC_NO):
+            if (record->event.pressed) {
+                if (record->tap.count) {
+                    // タップ時に Ctrl+C を送信
+                    tap_code16(C(KC_C));
+                    return false; // 他の処理をスキップ
+                } else {
+                    // ホールド時にレイヤー3へ
+                    layer_on(3);
+                    return false;
+                }
+            } else if (!record->event.pressed) {
+                // ホールド解除でレイヤー3をオフ
+                layer_off(3);
+            }
+            return false;
+        case LT(0,KC_NO):
+            if (record->event.pressed) {
+                if (record->tap.count) {
+                    tap_code16(A(KC_TAB));
+                    return false;
+                } else {
+                    register_code16(KC_LSFT);
+                    return false;
+                }
+            } else if (!record->event.pressed) {
+                unregister_code16(KC_LSFT);
+            }
+            return false;
+        case LT(4,KC_NO):
+            if (record->event.pressed) {
+                if (record->tap.count) {
+                    tap_code16(KC_E);
+                    return false; // 他の処理をスキップ
+                } else {
+                    register_code16(KC_SPC);
+                    return false;
+                }
+            } else if (!record->event.pressed) {
+                unregister_code16(KC_SPC);
+            }
+            return false;
+        case LT(5,KC_NO):
+            if (record->event.pressed) {
+                if (record->tap.count) {
+                    tap_code16(C(KC_V));
+                    return false; // 他の処理をスキップ
+                } else {
+                    register_code16(KC_LSFT);
+                    return false;
+                }
+            } else if (!record->event.pressed) {
+                unregister_code16(KC_LSFT);
+            }
+            return false;
+    }
+    if (record->event.pressed && is_ctrlc_pressed && keycode != CTRLC_OR_LAYER3) {
+        ctrlc_interrupted = true;
+
+        if (!is_ctrlc_hold_mode) {
+            layer_on(3);
+            is_ctrlc_hold_mode = true;
+        }
+    }
+    return true;
 }
