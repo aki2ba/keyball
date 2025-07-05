@@ -90,9 +90,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  _______   , _______  , _______    ,        _______  , KC_PSCR  ,                   SS_LHOST  , SS_DC     , _______       , _______  , _______
   ),
   [4] = LAYOUT_universal(
-    KC_TAB    , KC_Q    , KC_W           , LT(4,KC_NO)    , SFT_T(KC_R)           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
+    KC_TAB    , KC_Q    , KC_W           , LT(4,KC_NO)    , KC_R           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , KC_A    , MS_BTN1        , CTL_T(MS_BTN3) , ALT_T(MS_BTN2) , KC_G     ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , ALT_T(MS_BTN2)  , _______    , TO(3)     ,
-    TO0_HENK  , C(KC_Z) , C(KC_Y)        , LT(3,KC_NO)    , C(KC_V)        , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
+    TO0_HENK  , C(KC_Z) , C(KC_Y)        , LT(3,KC_NO)    , LT(4, KC_V)        , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
                 _______    , _______       , _______        , LT(5,KC_SPC)      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
   [5] = LAYOUT_universal(
@@ -183,17 +183,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case LT(4,KC_NO):
           if (record->event.pressed) {
               if (record->tap.count) {
-                  // タップ時に Ctrl+C を送信
                   tap_code16(KC_E);
                   return false; // 他の処理をスキップ
               } else {
-                  // ホールド時にレイヤー3へ
                   register_code16(KC_SPC);
                   return false;
               }
           } else if (!record->event.pressed) {
-              // ホールド解除でレイヤー3をオフ
               unregister_code16(KC_SPC);
+          }
+          return false;
+      case LT(4, KC_V):
+          if (record->event.pressed) {
+              if (record->tap.count) {
+                  tap_code16(C(KC_V));
+                  return false; // 他の処理をスキップ
+              } else {
+                  register_code16(KC_LSFT);
+                  return false;
+              }
+          } else if (!record->event.pressed) {
+              unregister_code16(KC_LSFT);
           }
           return false;
   }
