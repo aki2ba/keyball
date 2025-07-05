@@ -34,30 +34,25 @@ enum custom_keycodes {
   TO0_HENK
 };
 
-// enum {
-//   TD_L3_CTL_C = 0
-// };
+enum {
+  TD_CTL_C_L3 = 0
+};
 
-// void ctl_c_finished(tap_dance_state_t *state, void *user_data) {
-//   if (state->count == 1) {
-//       // タップ時に Ctrl+C を送信
-//       register_code(KC_LCTL);
-//       register_code(KC_C);
-//       unregister_code(KC_C);
-//       unregister_code(KC_LCTL);
-//   } else {
-//       // ホールド時にレイヤー3に移行
-//       layer_on(3);
-//   }
-// }
+void td_finished(tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1 && !state->interrupted && !state->pressed) {
+        tap_code16(C(KC_C));  // タップ: Ctrl+C
+    } else {
+        layer_on(3);          // ホールド: レイヤー3
+    }
+}
 
-// void ctl_c_reset(tap_dance_state_t *state, void *user_data) {
-//   layer_off(3);
-// }
+void td_reset(tap_dance_state_t *state, void *user_data) {
+    layer_off(3);
+}
 
-// tap_dance_action_t tap_dance_actions[] = {
-//   [TD_L3_CTL_C] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctl_c_finished, ctl_c_reset)
-// };
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_CTL_C_L3] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_finished, td_reset)
+};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -92,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [4] = LAYOUT_universal(
     KC_TAB    , KC_Q    , KC_W           , LT(4,KC_NO)    , KC_R           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , KC_A    , MS_BTN1        , CTL_T(MS_BTN3) , ALT_T(MS_BTN2) , KC_G     ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , ALT_T(MS_BTN2)  , _______    , TO(3)     ,
-    TO0_HENK  , C(KC_Z) , C(KC_Y)        , LT(2,KC_NO)    , LT(5,KC_NO)        , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
+    TO0_HENK  , C(KC_Z) , C(KC_Y)        , TD(TD_CTL_C_L3)    , LT(5,KC_NO)        , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
                 _______    , _______       , _______        , LT(5,KC_SPC)      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
   [5] = LAYOUT_universal(
