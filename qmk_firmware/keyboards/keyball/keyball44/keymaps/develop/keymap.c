@@ -31,7 +31,11 @@ enum custom_keycodes {
   SS_DC,
   SS_SD,
   TO0_MHEN,
-  TO0_HENK
+  TO0_HENK,
+  SPC_UP,
+  SPC_DOWN,
+  SPC_RGHT,
+  SPC_LEFT
 };
 
 // enum {
@@ -97,8 +101,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [5] = LAYOUT_universal(
     KC_TAB    , C(KC_Q)    , WIN_T(KC_W)  , C(KC_E)      , C(KC_R)     , C(KC_T)     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
-    TO0_MHEN  , C(KC_A)    , MS_BTN1      , SPACE_UP     , MS_BTN2     , KC_ENT      ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	MS_BTN2        , _______    , TO(3)     ,
-    TO0_HENK  , C(KC_Z)    , SPACE_LEFT   , SPACE_DOWN   , SPACE_RGHT  , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
+    TO0_MHEN  , C(KC_A)    , MS_BTN1      , SPC_UP     , MS_BTN2     , KC_ENT      ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	MS_BTN2        , _______    , TO(3)     ,
+    TO0_HENK  , C(KC_Z)    , SPC_LEFT   , SPC_DOWN   , SPC_RGHT  , A(KC_LEFT)  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
                 _______    , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
 };
@@ -151,7 +155,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               tap_code16(KC_INT4);
           }
           return false;
-      case SPACE_UP:
+      case SPC_UP:
           if (record->event.pressed) {
               register_code16(KC_SPC);
               tap_code16(KC_UP);
@@ -159,7 +163,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               unregister_code16(KC_SPC);
           }
           return false;
-      case SPACE_DOWM:
+      case SPC_DOWM:
           if (record->event.pressed) {
               register_code16(KC_SPC);
               tap_code16(KC_DOWM);
@@ -167,7 +171,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               unregister_code16(KC_SPC);
           }
           return false;
-      case SPACE_LEFT:
+      case SPC_LEFT:
           if (record->event.pressed) {
               register_code16(KC_SPC);
               tap_code16(KC_LEFT);
@@ -175,7 +179,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               unregister_code16(KC_SPC);
           }
           return false;
-      case SPACE_RGHT:
+      case SPC_RGHT:
           if (record->event.pressed) {
               register_code16(KC_SPC);
               tap_code16(KC_RGHT);
