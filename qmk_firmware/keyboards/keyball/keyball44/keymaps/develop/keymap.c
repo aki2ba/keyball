@@ -18,10 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-#include "action_layer.h"
-#include "action_tapping.h"
-#include "tap_dance.h"
-
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
   if (layer_state_is(0) && (abs(mouse_report.x) > 5 || abs(mouse_report.y) > 5)) {
       layer_move(2);
