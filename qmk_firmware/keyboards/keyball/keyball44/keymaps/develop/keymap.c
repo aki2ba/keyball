@@ -163,10 +163,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               unregister_code16(KC_SPC);
           }
           return false;
-      case SPC_DOWM:
+      case SPC_DOWN:
           if (record->event.pressed) {
               register_code16(KC_SPC);
-              tap_code16(KC_DOWM);
+              tap_code16(KC_DOWN);
           } else if (!record->event.pressed) {
               unregister_code16(KC_SPC);
           }
