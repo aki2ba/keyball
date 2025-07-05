@@ -123,6 +123,10 @@ void oledkit_render_info_user(void) {
 
 #endif
 
+static uint16_t ctrlc_timer;
+static bool ctrlc_interrupted = false;
+static bool is_ctrlc_pressed = false;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
       case SS_LHOST:
@@ -154,18 +158,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
       case CTRLC_OR_LAYER3:
           if (record->event.pressed) {
-              if (record->tap.count) {
-                  // タップ時に Ctrl+C を送信
+              ctrlc_timer = timer_read();
+              ctrlc_interrupted = false;
+              is_ctrlc_pressed = true;
+          } else {
+              is_ctrlc_pressed = false;
+              if (!ctrlc_interrupted && timer_elapsed(ctrlc_timer) < TAPPING_TERM) {
                   tap_code16(C(KC_C));
-                  return false; // 他の処理をスキップ
               } else {
-                  // ホールド時にレイヤー3へ
-                  layer_on(3);
-                  return false;
+                  layer_off(3);
               }
-          } else if (!record->event.pressed) {
-              // ホールド解除でレイヤー3をオフ
-              layer_off(3);
           }
           return false;
       case LT(3,KC_NO):
@@ -223,6 +225,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               unregister_code16(KC_LSFT);
           }
           return false;
+  }
+  if (record->event.pressed && is_ctrlc_pressed) {
+      ctrlc_interrupted = true;
   }
   return true;
 }
