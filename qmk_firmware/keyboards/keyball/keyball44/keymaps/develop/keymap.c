@@ -31,8 +31,7 @@ enum custom_keycodes {
   SS_DC,
   SS_SD,
   TO0_MHEN,
-  TO0_HENK,
-  CTRLC_OR_LAYER3
+  TO0_HENK
 };
 
 // enum {
@@ -93,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [4] = LAYOUT_universal(
     KC_TAB    , KC_Q    , KC_W           , LT(4,KC_NO)    , KC_R           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , KC_A    , MS_BTN1        , CTL_T(MS_BTN3) , ALT_T(MS_BTN2) , KC_G     ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , ALT_T(MS_BTN2)  , _______    , TO(3)     ,
-    TO0_HENK  , C(KC_Z) , C(KC_Y)        , CTRLC_OR_LAYER3    , LT(5,KC_NO)        , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
+    TO0_HENK  , C(KC_Z) , C(KC_Y)        , LT(2,KC_NO)    , LT(5,KC_NO)        , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
                 _______    , _______       , _______        , LT(5,KC_SPC)      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
   [5] = LAYOUT_universal(
@@ -122,11 +121,6 @@ void oledkit_render_info_user(void) {
 }
 
 #endif
-
-static uint16_t ctrlc_timer = 0;
-static bool ctrlc_interrupted = false;
-static bool is_ctrlc_pressed = false;
-static bool is_ctrlc_hold_mode = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -157,25 +151,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(KC_INT4);
             }
             return false;
-        case CTRLC_OR_LAYER3:
+        case LT(2,KC_NO):
             if (record->event.pressed) {
-                ctrlc_timer = timer_read();
-                ctrlc_interrupted = false;
-                is_ctrlc_pressed = true;
-                is_ctrlc_hold_mode = false;
-            } else {
-                is_ctrlc_pressed = false;
-
-                if (!ctrlc_interrupted && timer_elapsed(ctrlc_timer) < TAPPING_TERM) {
-                    // タップ → Ctrl+C
+                if (record->tap.count) {
+                    // タップ時に Ctrl+C を送信
                     tap_code16(C(KC_C));
+                    return false; // 他の処理をスキップ
                 } else {
-                    // ホールド終了 → レイヤー3オフ
-                    if (is_ctrlc_hold_mode) {
-                        layer_off(3);
-                        is_ctrlc_hold_mode = false;
-                    }
+                    // ホールド時にレイヤー3へ
+                    layer_on(3);
+                    return false;
                 }
+            } else if (!record->event.pressed) {
+                // ホールド解除でレイヤー3をオフ
+                layer_off(3);
             }
             return false;
         case LT(3,KC_NO):
@@ -233,14 +222,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code16(KC_LSFT);
             }
             return false;
-    }
-    if (record->event.pressed && is_ctrlc_pressed && keycode != CTRLC_OR_LAYER3) {
-        ctrlc_interrupted = true;
-
-        if (!is_ctrlc_hold_mode) {
-            layer_on(3);
-            is_ctrlc_hold_mode = true;
-        }
     }
     return true;
 }
