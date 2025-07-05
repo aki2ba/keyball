@@ -154,15 +154,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
       case CTRLC_OR_LAYER3:
           if (record->event.pressed) {
-              if (record->tap.count > 0 && !record->hold) {
-                  // タップ時：Ctrl+C
+              if (record->tap.count) {
+                  // タップ時に Ctrl+C を送信
                   tap_code16(C(KC_C));
+                  return false; // 他の処理をスキップ
               } else {
-                  // ホールド時：Layer 3 に切り替え
+                  // ホールド時にレイヤー3へ
                   layer_on(3);
+                  return false;
               }
-          } else {
-              // ホールド解除時：レイヤーを戻す
+          } else if (!record->event.pressed) {
+              // ホールド解除でレイヤー3をオフ
               layer_off(3);
           }
           return false;
