@@ -32,10 +32,6 @@ enum custom_keycodes {
   SS_SD,
   TO0_MHEN,
   TO0_HENK,
-  SPC_UP,
-  SPC_DOWN,
-  SPC_RGHT,
-  SPC_LEFT
 };
 
 // enum {
@@ -97,13 +93,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB    , KC_Q    , KC_W           , LT(4,KC_NO)    , SFT_T(KC_R)           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , KC_A    , MS_BTN1        , CTL_T(MS_BTN3) , ALT_T(MS_BTN2) , KC_G     ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , ALT_T(MS_BTN2)  , _______    , TO(3)     ,
     TO0_HENK  , C(KC_Z) , C(KC_Y)        , LT(3,KC_NO)    , C(KC_V)        , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
-                TO(5)      , _______       , _______        , LT(5,KC_SPC)      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
+                _______    , _______       , _______        , LT(5,KC_SPC)      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
   [5] = LAYOUT_universal(
-    KC_TAB    , KC_P    , KC_O       , KC_I     , KC_U     , KC_Y  ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
-    TO0_MHEN  , KC_S    , MS_BTN1    , SPC_UP   , MS_BTN2  , KC_H  ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	ALT_T(MS_BTN2)  , _______    , TO(3)     ,
-    TO0_HENK  , KC_Z    , SPC_LEFT   , SPC_DOWN , SPC_RGHT , KC_N  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
-                TO(4)      , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
+    KC_TAB    , KC_P    , KC_O       , KC_I       , KC_U     , KC_Y  ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
+    TO0_MHEN  , KC_S    , MS_BTN1    , S(KC_UP)   , MS_BTN2  , KC_H  ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	ALT_T(MS_BTN2)  , _______    , TO(3)     ,
+    TO0_HENK  , KC_Z    , S(KC_LEFT) , S(KC_DOWN) , S(KC_RGHT) , KC_N  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
+                _______  , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
 };
 // clang-format on
@@ -153,38 +149,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
               layer_move(0);
               tap_code16(KC_INT4);
-          }
-          return false;
-      case SPC_UP:
-          if (record->event.pressed) {
-              register_code16(KC_SPC);
-              tap_code16(KC_UP);
-          } else if (!record->event.pressed) {
-              unregister_code16(KC_SPC);
-          }
-          return false;
-      case SPC_DOWN:
-          if (record->event.pressed) {
-              register_code16(KC_SPC);
-              tap_code16(KC_DOWN);
-          } else if (!record->event.pressed) {
-              unregister_code16(KC_SPC);
-          }
-          return false;
-      case SPC_LEFT:
-          if (record->event.pressed) {
-              register_code16(KC_SPC);
-              tap_code16(KC_LEFT);
-          } else if (!record->event.pressed) {
-              unregister_code16(KC_SPC);
-          }
-          return false;
-      case SPC_RGHT:
-          if (record->event.pressed) {
-              register_code16(KC_SPC);
-              tap_code16(KC_RGHT);
-          } else if (!record->event.pressed) {
-              unregister_code16(KC_SPC);
           }
           return false;
       case LT(3,KC_NO):
