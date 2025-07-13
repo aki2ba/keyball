@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  _______   , _______  , _______    ,        _______  , KC_PSCR  ,                   SS_LHOST  , SS_DC     , _______       , _______  , _______
   ),
   [4] = LAYOUT_universal(
-    KC_TAB    , KC_Q    , KC_W           , LT(4,KC_NO)      , KC_R           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
+    KC_TAB    , KC_Q    , LT(5,KC_W)     , LT(4,KC_NO)      , KC_R           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , KC_A    , MS_BTN1        , CTL_T(MS_BTN3)   , ALT_T(MS_BTN2) , KC_G     ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , ALT_T(MS_BTN2)  , _______    , TO(3)     ,
     TO0_HENK  , C(KC_Z) , C(KC_Y)        , LT(6,KC_NO)      , LT(5,KC_NO)    , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
                 _______    , _______       , _______        , LT(5,KC_SPC)      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
