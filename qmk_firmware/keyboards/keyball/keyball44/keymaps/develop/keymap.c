@@ -71,10 +71,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 _______    , _______       , _______        , LT(5,KC_SPC)      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
   [5] = LAYOUT_universal(
-    KC_DEL    , KC_P    , KC_O     , KC_I        , KC_U  , KC_Y  ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
-    TO0_MHEN  , KC_S    , C(KC_S)  , LT(7,KC_NO) , ALT_T(KC_F)  , KC_H  ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	ALT_T(MS_BTN2)  , _______    , TO(3)     ,
+    KC_DEL    , KC_P    , KC_O     , KC_I        , KC_U         , KC_J  ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
+    TO0_MHEN  , KC_L    , C(KC_S)  , LT(7,KC_NO) , ALT_T(KC_F)  , KC_H  ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	ALT_T(MS_BTN2)  , _______    , TO(3)     ,
     TO0_HENK  , KC_Z    , KC_X     , KC_C        , SFT_T(KC_V)  , KC_N  ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
-                _______  , _______       , _______        ,         KC_SPC      , KC_ENT,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
+                _______  , _______       , _______        ,         KC_SPC     , KC_BSPC,                KC_ESC   , KC_LWIN     , S(KC_CAPS)           , KC_HOME        , KC_END
   ),
 };
 // clang-format on
