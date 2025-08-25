@@ -29,7 +29,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 enum custom_keycodes {
   SS_LHOST = KEYBALL_SAFE_RANGE,
   SS_DC,
-  SS_SD,
+  SS_FF,
   TO0_MHEN,
   TO0_HENK
 };
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB     , KC_F1     , KC_F2    , KC_F3      , KC_F4     , KC_F5    ,                                        KC_F6     , KC_F7     , KC_F8     , KC_F9     , KC_F10    , _______   ,
     TO0_MHEN   , KC_F11    , C(KC_S)  , C(KC_D)    , C(KC_F)   , KC_F12   ,                                        _______   , C(KC_J)   , C(KC_K)   , C(KC_L)   , TO(2)     , _______   ,
     TO0_HENK   , _______   , C(KC_X)  , S(KC_TAB)  , KC_TAB    , C(KC_B)  ,                                        C(KC_N)   , KC_LALT   , _______   , KC_LSFT   , _______   , _______   ,
-                 _______   , _______  , _______    ,        _______  , KC_PSCR  ,                   SS_LHOST  , SS_DC     , _______       , _______  , _______
+                 _______   , _______  , _______    ,        _______  , KC_PSCR  ,                   SS_LHOST  , SS_DC     , SS_FF       , _______  , _______
   ),
   [4] = LAYOUT_universal(
     KC_TAB    , KC_Q    , LT(5,KC_W)     , LT(4,KC_NO)      , KC_R           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
@@ -109,9 +109,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING("docker compose");
             }
             return false;
-        case SS_SD:
+        case SS_FF:
             if (record->event.pressed) {
-                SEND_STRING("/home/wsl-user/workspace/sd_docker/workspace.code-workspace");
+                SEND_STRING("fetch first 50 rows only");
             }
             return false;
         case TO0_MHEN:
