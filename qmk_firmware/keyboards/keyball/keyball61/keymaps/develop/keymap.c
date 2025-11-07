@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______  ,  TO(4)   , _______  , _______  , S(KC_CAPS)   ,KC_SPC       , KC_ENT   ,                                  KC_ESC,   KC_LWIN,                                               _______  , _______  
   ),
 
-  [2] = LAYOUT_right_ball(
+  [3] = LAYOUT_right_ball(
     _______  , _______  , _______  , _______  , _______  , _______  ,                                                          _______  , _______     ,  _______  , _______ , _______  , _______  ,
     KC_TAB     , KC_F1     , KC_F2    , KC_F3      , KC_F4     , KC_F5    ,                                        KC_F6     , KC_F7     , KC_F8     , KC_F9     , KC_F10    , _______   ,
     TO0_MHEN   , KC_F11    , C(KC_S)  , C(KC_D)    , C(KC_F)   , KC_F12   ,                                        _______   , C(KC_J)   , C(KC_K)   , C(KC_L)   , TO(2)     , _______   ,
