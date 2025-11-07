@@ -37,7 +37,7 @@ enum custom_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
-  [0] = LAYOUT_universal(
+  [0] = LAYOUT_right_ball(
     _______  , _______  , _______  , _______  , _______  , _______  ,                                                          _______  , _______     ,  KC_MINS       , S(KC_INT1)      , _______  , _______  ,
     KC_TAB     , KC_Q     , WIN_T(KC_W)  , KC_E           , KC_R           , KC_T     ,                                        KC_Y     , KC_U        , KC_I           , KC_O            , KC_P     , KC_BSPC   ,
     KC_INT5    , KC_A     , KC_S         , CTL_T(KC_D)    , LT(2,KC_F)     , KC_G     ,                                        KC_H     , LT(2,KC_J)  , CTL_T(KC_K)    , ALT_T(KC_L)     , TO(2)    , TO(3)     ,
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______  ,  TO(4)   , _______  , _______  , S(KC_CAPS)   ,KC_SPC       , KC_ENT   ,                                   KC_ESC,   KC_LWIN,                                               _______  , _______  ,
   ),
 
-  [1] = LAYOUT_universal(
+  [1] = LAYOUT_right_ball(
     _______  , _______  , _______  , _______  , _______  , _______  ,                                                          _______  , _______     ,  KC_MINS       , S(KC_INT1)      , _______  , _______  ,
     KC_TAB     ,  S(KC_EQL)  , KC_1     , KC_2    , KC_3   , S(KC_4)   ,                                               S(KC_LBRC)   , S(KC_1)    , S(KC_2)    , S(KC_3)     , S(KC_SCLN)  , S(KC_QUOT)  ,
     TO0_MHEN   ,  KC_0       , KC_4     , KC_5    , KC_6   , S(KC_5)   ,                                               KC_LBRC      , S(KC_7)    , S(KC_8)    , S(KC_9)     , KC_SCLN     , KC_QUOT     ,
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______  ,  TO(4)   , _______  , _______  , S(KC_CAPS)   ,KC_SPC       , KC_ENT   ,                                   KC_ESC,   KC_LWIN,                                               _______  , _______  ,
   ),
 
-  [2] = LAYOUT_universal(
+  [2] = LAYOUT_right_ball(
     _______  , _______  , _______  , _______  , _______  , _______  ,                                                          _______  , _______     ,  KC_HOME        , KC_END     , _______  , _______  ,
     KC_TAB    , C(KC_Q)    , WIN_T(KC_W)  , C(KC_E)      , C(KC_R)     , C(KC_T)     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , C(KC_A)    , MS_BTN1      , MS_BTN3      , MS_BTN2     , KC_ENT      ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , ALT_T(MS_BTN2)        , _______    , TO(3)     ,
@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______  ,  TO(4)   , _______  , _______  , S(KC_CAPS)   ,KC_SPC       , KC_ENT   ,                                   KC_ESC,   KC_LWIN,                                               _______  , _______  ,
   ),
 
-  [2] = LAYOUT_universal(
+  [2] = LAYOUT_right_ball(
     _______  , _______  , _______  , _______  , _______  , _______  ,                                                          _______  , _______     ,  _______  , _______ , _______  , _______  ,
     KC_TAB     , KC_F1     , KC_F2    , KC_F3      , KC_F4     , KC_F5    ,                                        KC_F6     , KC_F7     , KC_F8     , KC_F9     , KC_F10    , _______   ,
     TO0_MHEN   , KC_F11    , C(KC_S)  , C(KC_D)    , C(KC_F)   , KC_F12   ,                                        _______   , C(KC_J)   , C(KC_K)   , C(KC_L)   , TO(2)     , _______   ,
@@ -69,14 +69,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______  ,  TO(4)   , _______  , _______  , _______   ,SS_FF       , KC_PSCR   ,                                   SS_LHOST  , SS_DC ,                                               _______  , _______  ,
   ),
 
-  [4] = LAYOUT_universal(
+  [4] = LAYOUT_right_ball(
     _______  , _______  , _______  , _______  , _______  , _______  ,                                                          _______  , _______     ,  _______  , _______ , _______  , _______  ,
     KC_TAB    , KC_Q    , LT(5,KC_W)     , LT(4,KC_NO)      , KC_R           , KC_T     ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , KC_A    , MS_BTN1        , CTL_T(MS_BTN3)   , ALT_T(MS_BTN2) , KC_G     ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , ALT_T(MS_BTN2)  , _______    , TO(3)     ,
     TO0_HENK  , C(KC_Z) , C(KC_Y)        , LT(6,KC_NO)      , LT(5,KC_NO)    , KC_B     ,                                        A(KC_RGHT)  , LT(1,KC_LEFT)  , LT(3,KC_DOWN)  , SFT_T(KC_RGHT)  , KC_SLSH    , KC_DEL    ,
     _______  ,  TO(4)   , _______  , _______  , S(KC_CAPS)   ,KC_SPC       , KC_ENT   ,                                   KC_ESC,   KC_LWIN,                                               _______  , _______  ,
   ),
-  [5] = LAYOUT_universal(
+  [5] = LAYOUT_right_ball(
     _______  , _______  , _______  , _______  , _______  , _______  ,                                                          _______  , _______     ,  _______  , _______ , _______  , _______  ,
     KC_DEL    , KC_P    , KC_O     , KC_I        , KC_U         , KC_J  ,                                        C(KC_Y)     , C(KC_PGUP)     , MS_BTN3        , C(KC_PGDN)      , C(KC_P)    , KC_BSPC   ,
     TO0_MHEN  , KC_L    , C(KC_S)  , LT(7,KC_NO) , ALT_T(KC_F)  , KC_H  ,                                        C(KC_H)     , MS_BTN1        , CTL_T(KC_UP)   , 	ALT_T(MS_BTN2)  , _______    , TO(3)     ,
